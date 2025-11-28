@@ -33,25 +33,34 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-brand-dark/90 backdrop-blur-md shadow-lg py-2' 
+          ? 'bg-brand-dark/95 backdrop-blur-md shadow-lg py-3' 
           : 'bg-transparent py-4 lg:py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center group">
-            <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors">
-              <Leaf className="h-6 w-6 text-brand-lightGreen" />
+          <Link 
+            to="/" 
+            onClick={handleLogoClick}
+            className="flex items-center group cursor-pointer z-50"
+          >
+            <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm group-hover:bg-brand-lightGreen/20 transition-all duration-300 group-hover:scale-110">
+              <Leaf className="h-5 w-5 md:h-6 md:w-6 text-brand-lightGreen group-hover:text-brand-lightGreen" />
             </div>
             <div className="flex flex-col ml-3">
-              <span className={`font-serif text-xl font-bold tracking-wider transition-colors ${scrolled ? 'text-white' : 'text-white'}`}>
+              <span className="font-serif text-lg md:text-xl font-bold tracking-wider transition-colors text-white">
                 KERLING FARM
               </span>
-              <span className="text-[10px] text-brand-lightGreen tracking-[0.3em] uppercase">古林园</span>
+              <span className="text-[9px] md:text-[10px] text-brand-lightGreen tracking-[0.3em] uppercase group-hover:tracking-[0.4em] transition-all duration-300">古林园</span>
             </div>
           </Link>
           
@@ -62,12 +71,13 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onClick={() => window.scrollTo(0, 0)}
                   className="relative px-4 py-2 group"
                 >
                   <span className={`relative z-10 text-sm font-medium transition-colors duration-200 ${
                     isActive(link.path)
                       ? 'text-brand-lightGreen'
-                      : scrolled ? 'text-gray-200 group-hover:text-white' : 'text-white/90 group-hover:text-white'
+                      : 'text-white/90 group-hover:text-white'
                   }`}>
                     {link.name}
                   </span>
@@ -85,21 +95,22 @@ const Navbar: React.FC = () => {
             {/* Language Switcher */}
             <button 
               onClick={toggleLanguage}
-              className="ml-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20 text-white text-xs font-medium uppercase tracking-wider"
+              className="ml-6 flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20 hover:border-brand-lightGreen/50 text-white text-xs font-medium uppercase tracking-wider group relative overflow-hidden"
             >
-              <Globe className="h-3 w-3" />
-              <span>{language === 'en' ? '中文' : 'EN'}</span>
+              <div className="absolute inset-0 bg-brand-lightGreen/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <Globe className="h-3 w-3 relative z-10 group-hover:rotate-180 transition-transform duration-500" />
+              <span className="relative z-10">{language === 'en' ? '中文' : 'EN'}</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="-mr-2 flex items-center gap-4 md:hidden">
+          <div className="-mr-2 flex items-center gap-2 md:hidden z-50">
              {/* Mobile Language Switcher */}
              <button 
               onClick={toggleLanguage}
-              className="flex items-center justify-center p-2 rounded-md text-white/80 hover:text-white transition-colors"
+              className="flex items-center justify-center p-2 rounded-full border border-white/10 bg-white/5 text-white/90 hover:text-white transition-colors active:scale-95 transform duration-200"
             >
-              <span className="font-bold text-xs">{language === 'en' ? '中文' : 'EN'}</span>
+              <span className="font-bold text-xs px-1">{language === 'en' ? '中' : 'EN'}</span>
             </button>
 
             <button
@@ -117,25 +128,38 @@ const Navbar: React.FC = () => {
         {isOpen && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: '100vh' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-white/10 overflow-hidden"
+            className="md:hidden fixed inset-0 top-0 bg-brand-dark z-40 flex flex-col pt-24 px-4 overflow-y-auto"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navLinks.map((link) => (
-                <Link
+            <div className="space-y-4 px-2">
+              {navLinks.map((link, idx) => (
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-3 rounded-md text-base font-medium ${
-                    isActive(link.path)
-                      ? 'bg-brand-lightGreen/20 text-brand-lightGreen'
-                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 * idx }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    to={link.path}
+                    onClick={() => {
+                       setIsOpen(false);
+                       window.scrollTo(0, 0);
+                    }}
+                    className={`block px-4 py-4 rounded-xl text-lg font-medium border border-transparent transition-all duration-200 ${
+                      isActive(link.path)
+                        ? 'bg-brand-lightGreen/20 text-brand-lightGreen border-brand-lightGreen/30'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
+            </div>
+            
+            <div className="mt-auto pb-10 text-center text-white/30 text-sm">
+                <p>&copy; {new Date().getFullYear()} Kerling Farm</p>
             </div>
           </motion.div>
         )}

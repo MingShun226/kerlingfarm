@@ -22,7 +22,7 @@ const Accommodations: React.FC = () => {
       </Helmet>
 
       {/* Header */}
-      <div className="relative bg-brand-dark py-24 lg:py-32 overflow-hidden">
+      <div className="relative bg-brand-dark py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
            <img src="https://picsum.photos/id/1029/1920/600" alt="Background" className="w-full h-full object-cover" />
         </div>
@@ -31,7 +31,7 @@ const Accommodations: React.FC = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-serif font-bold mb-6"
+            className="text-4xl md:text-7xl font-serif font-bold mb-4 md:mb-6"
           >
             {nav.accommodations}
           </motion.h1>
@@ -39,28 +39,28 @@ const Accommodations: React.FC = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-brand-sage max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-brand-sage max-w-2xl mx-auto px-2"
           >
             From modern suites nestled in nature to outdoor camping adventures under the stars.
           </motion.p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 md:-mt-10 relative z-20">
         
         {/* Notice Card */}
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="bg-white rounded-xl shadow-xl p-6 mb-16 border-l-4 border-brand-lightGreen flex items-start md:items-center gap-4"
+          className="bg-white rounded-xl shadow-xl p-5 md:p-6 mb-12 md:mb-16 border-l-4 border-brand-lightGreen flex flex-col md:flex-row items-start md:items-center gap-4"
         >
-          <div className="bg-brand-lightGreen/10 p-3 rounded-full shrink-0">
-            <Info className="h-6 w-6 text-brand-lightGreen" />
+          <div className="bg-brand-lightGreen/10 p-2 md:p-3 rounded-full shrink-0">
+            <Info className="h-5 w-5 md:h-6 md:w-6 text-brand-lightGreen" />
           </div>
           <div>
-            <h3 className="font-serif font-bold text-lg text-brand-dark">Important Booking Notice</h3>
-            <p className="text-stone-600 mt-1">
+            <h3 className="font-serif font-bold text-base md:text-lg text-brand-dark">Important Booking Notice</h3>
+            <p className="text-stone-600 mt-1 text-sm md:text-base">
               {ui.contact.policyText}
             </p>
           </div>
@@ -75,27 +75,27 @@ const Accommodations: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col"
+              className="group bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col"
             >
-              <div className="h-72 sm:h-80 overflow-hidden relative">
+              <div className="h-60 sm:h-72 md:h-80 overflow-hidden relative">
                 <img 
                   src={room.image} 
                   alt={room.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-brand-dark uppercase tracking-wider shadow-md">
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs font-bold text-brand-dark uppercase tracking-wider shadow-md">
                   {room.type}
                 </div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h2 className="text-3xl font-serif font-bold leading-tight">{room.name}</h2>
+                <div className="absolute bottom-4 left-4 text-white pr-4">
+                  <h2 className="text-2xl md:text-3xl font-serif font-bold leading-tight">{room.name}</h2>
                 </div>
               </div>
               
-              <div className="p-8 flex-1 flex flex-col">
-                <p className="text-stone-600 mb-8 leading-relaxed text-lg">{room.description}</p>
+              <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <p className="text-stone-600 mb-6 md:mb-8 leading-relaxed text-base md:text-lg">{room.description}</p>
                 
-                <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 md:gap-y-3 gap-x-4 mb-6 md:mb-8">
                   {room.amenities.map((amenity, idx) => (
                     <div key={idx} className="flex items-center text-sm font-medium text-stone-500">
                       <Check className="h-4 w-4 text-brand-lightGreen mr-2 shrink-0" />
@@ -110,7 +110,7 @@ const Accommodations: React.FC = () => {
                    </div>
                 )}
 
-                <div className="border-t border-stone-100 pt-6 mt-auto flex items-end justify-between">
+                <div className="border-t border-stone-100 pt-6 mt-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-0">
                    <div className="flex flex-col gap-1">
                       <div className="flex items-center text-stone-500 text-sm">
                         <Users className="h-4 w-4 mr-2" />
@@ -118,12 +118,14 @@ const Accommodations: React.FC = () => {
                       </div>
                    </div>
                    
-                   <div className="text-right">
-                      <p className="text-sm text-stone-400 mb-1">Starting from</p>
-                      <p className="text-3xl font-bold text-brand-green font-serif">{room.priceWeekend}</p>
-                      {room.priceWeekday && (
-                        <p className="text-xs text-stone-400 font-medium">{room.priceWeekday}</p>
-                      )}
+                   <div className="text-left sm:text-right">
+                      <p className="text-xs text-stone-400 mb-0.5 md:mb-1">Starting from</p>
+                      <div className="flex items-baseline gap-2 sm:block">
+                        <p className="text-2xl md:text-3xl font-bold text-brand-green font-serif">{room.priceWeekend}</p>
+                        {room.priceWeekday && (
+                          <p className="text-xs text-stone-400 font-medium">{room.priceWeekday}</p>
+                        )}
+                      </div>
                    </div>
                 </div>
               </div>
