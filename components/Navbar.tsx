@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               <span className="font-serif text-lg md:text-xl font-bold tracking-wider transition-colors text-white">
                 KERLING FARM
               </span>
-              <span className="text-[9px] md:text-[10px] text-brand-lightGreen tracking-[0.3em] uppercase group-hover:tracking-[0.4em] transition-all duration-300">古林园</span>
+              <span className="text-[9px] md:text-[10px] text-brand-lightGreen tracking-[0.3em] uppercase group-hover:tracking-[0.4em] transition-all duration-300">吉林园</span>
             </div>
           </Link>
           

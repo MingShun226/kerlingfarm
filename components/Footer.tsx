@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                   <span className="font-serif text-2xl md:text-3xl font-bold tracking-wider text-white group-hover:text-brand-lightGreen transition-colors duration-300">
                     KERLING FARM
                   </span>
-                  <span className="text-[10px] md:text-xs text-brand-lightGreen tracking-[0.5em] uppercase mt-1 group-hover:tracking-[0.6em] transition-all duration-300">古林园</span>
+                  <span className="text-[10px] md:text-xs text-brand-lightGreen tracking-[0.5em] uppercase mt-1 group-hover:tracking-[0.6em] transition-all duration-300">吉林园</span>
                 </div>
             </Link>
             <p className="text-brand-sage text-sm leading-relaxed max-w-xs">
